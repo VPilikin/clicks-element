@@ -1,25 +1,82 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react'
+import { Container, Pagination } from 'react-bootstrap'
 
 function App() {
+  const [num, setNum] = useState([])
+  const [result, setResult] = useState([])
+  const numLength = 10 ** 5
+
+  useEffect(() => {
+    setNum(() => getRandomNumber(numLength))
+    const onKeypress = (e) => {
+      let l = e.key
+      if (l >= 0) {
+        setResult((result) => [...result, l])
+      }
+      if (
+        l === 'ContextMenu' ||
+        l === ' ' ||
+        l === 'Backspace' ||
+        l === '§' ||
+        l === '>' ||
+        l === 'Enter'
+      ) {
+        setNum(() => getRandomNumber(numLength))
+        setResult([])
+      }
+    }
+
+    document.addEventListener('keypress', onKeypress)
+
+    return () => {
+      document.removeEventListener('keypress', onKeypress)
+    }
+  }, [])
+
+  const validate = result.map((el, i) => (el == num[i] ? true : false))
+
+  const getRandomNumber = (n) => {
+    const random = Math.floor(Math.random() * n)
+      .toString()
+      .split('')
+    while (random.length < 4) {
+      random.unshift('0')
+    }
+    return random
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Container
+      onClick={() => {
+        setNum(getRandomNumber(numLength))
+        setResult([])
+      }}
+      className="mt-5 d-flex flex-column align-items-center "
+    >
+      <Container
+        onClick={() => {
+          setNum(getRandomNumber(numLength))
+          setResult([])
+        }}
+        className="d-block d-sm-none"
+        fluid
+      >
+        <input type="tel" value="" className="input-for-mobile"></input>
+      </Container>
+      <Pagination size="lg">
+        {num.map((el, i) => (
+          <Pagination.Item
+            key={i}
+            className={`big ${
+              validate[i] ? 'green' : validate[i] === false ? 'red' : ''
+            }`}
+          >
+            {el}
+          </Pagination.Item>
+        ))}
+      </Pagination>
+    </Container>
+  )
 }
 
-export default App;
+export default App
