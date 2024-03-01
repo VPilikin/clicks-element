@@ -16,3 +16,16 @@
   width: 6em;
   text-align: center;
 }
+
+.win,
+.lose {
+  transition: all 5s ease-out;
+}
+
+.win {
+  background-color: rgb(17, 180, 17);
+}
+
+.lose {
+  background-color: rgb(196, 69, 69);
+}

@@ -46,8 +46,16 @@ function Password() {
     return random
   }
 
+  const checkResult = () => {
+    if (num.length > result.length) return ''
+    if (num.join('') === result.join('')) return 'win'
+    return 'lose'
+  }
+
   return (
-    <Container className="mt-5 d-flex flex-column align-items-center ">
+    <Container
+      className={`mt-5 d-flex flex-column align-items-center ${checkResult()}`}
+    >
       <Pagination size="lg">
         {num.map((el, i) => (
           <Pagination.Item
