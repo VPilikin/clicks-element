@@ -46,23 +46,7 @@ function App() {
   }
 
   return (
-    <Container
-      onClick={() => {
-        setNum(getRandomNumber(numLength))
-        setResult([])
-      }}
-      className="mt-5 d-flex flex-column align-items-center "
-    >
-      <Container
-        onClick={() => {
-          setNum(getRandomNumber(numLength))
-          setResult([])
-        }}
-        className="d-block d-sm-none"
-        fluid
-      >
-        <input type="tel" value="" className="input-for-mobile"></input>
-      </Container>
+    <Container className="mt-5 d-flex flex-column align-items-center ">
       <Pagination size="lg">
         {num.map((el, i) => (
           <Pagination.Item
@@ -75,6 +59,68 @@ function App() {
           </Pagination.Item>
         ))}
       </Pagination>
+      <Container
+        className="mt-5 d-flex flex-column align-items-center d-sm-none"
+        fluid
+      >
+        <Pagination size="lg">
+          {[1, 2, 3].map((el, i) => (
+            <Pagination.Item
+              onClick={() => {
+                setResult((result) => [...result, el])
+              }}
+              key={i + ' ' + el}
+              className={`big tel-keys`}
+            >
+              {el}
+            </Pagination.Item>
+          ))}
+        </Pagination>
+        <Pagination size="lg">
+          {[4, 5, 6].map((el, i) => (
+            <Pagination.Item
+              onClick={() => {
+                setResult((result) => [...result, el])
+              }}
+              key={i + ' ' + el}
+              className={`big tel-keys`}
+            >
+              {el}
+            </Pagination.Item>
+          ))}
+        </Pagination>
+        <Pagination size="lg">
+          {[7, 8, 9].map((el, i) => (
+            <Pagination.Item
+              onClick={() => {
+                setResult((result) => [...result, el])
+              }}
+              key={i + ' ' + el}
+              className={`big tel-keys`}
+            >
+              {el}
+            </Pagination.Item>
+          ))}
+        </Pagination>
+        <Pagination size="lg">
+          {['^', 0, '^'].map((el, i) => (
+            <Pagination.Item
+              onClick={() => {
+                if (el == 0) {
+                  setResult((result) => [...result, el])
+                } else {
+                  setNum(() => getRandomNumber(numLength))
+                  setResult([])
+                }
+              }}
+              key={i + ' ' + el}
+              className={`big tel-keys`}
+            >
+              {el}
+            </Pagination.Item>
+          ))}
+        </Pagination>
+      </Container>
     </Container>
   )
 }
