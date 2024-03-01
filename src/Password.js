@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Container, Pagination } from 'react-bootstrap'
 
-function App() {
+function Password() {
   const [num, setNum] = useState([])
   const [result, setResult] = useState([])
   const numLength = 10 ** 5
@@ -125,4 +125,4 @@ function App() {
   )
 }
 
-export default App
+export default Password

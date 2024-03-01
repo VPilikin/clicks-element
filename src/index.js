@@ -2,11 +2,25 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
-import App from './App'
+import Password from './Password'
+import Clicks from './Clicks'
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom'
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Password />}>
+      <Route path="clicks" element={<Clicks />} />
+    </Route>
+  )
+)
+
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 )
