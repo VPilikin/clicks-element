@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import './clicks.css'
 import img0 from './svg/0.svg'
 import img1 from './svg/1.svg'
 import img2 from './svg/2.svg'

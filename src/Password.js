@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Container, Pagination } from 'react-bootstrap'
+import { useResize } from './utilites/useResize'
 
 function Password() {
   const [num, setNum] = useState([])
   const [result, setResult] = useState([])
-  const numLength = 10 ** 5
+  const numLength = useResize().width > 800 ? 10 ** 10 : 10 ** 5
 
   useEffect(() => {
     setNum(() => getRandomNumber(numLength))
