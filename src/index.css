@@ -17,15 +17,30 @@
   text-align: center;
 }
 
-.win,
-.lose {
-  transition: all 5s ease-out;
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.win {
+.win::before,
+.lose::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  animation: 5s show ease-out;
+}
+
+.win::before {
   background-color: rgb(17, 180, 17);
 }
 
-.lose {
+.lose::before {
   background-color: rgb(196, 69, 69);
 }
