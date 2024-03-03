@@ -5,7 +5,7 @@ import { useResize } from './utilites/useResize'
 function Password() {
   const [num, setNum] = useState([])
   const [result, setResult] = useState([])
-  const numLength = useResize().width > 800 ? 10 ** 10 : 10 ** 5
+  const numLength = useResize().width > 800 ? 10 ** 10 : 10 ** 4
 
   useEffect(() => {
     setNum(() => getRandomNumber(numLength))
@@ -34,7 +34,7 @@ function Password() {
     }
   }, [])
 
-  const validate = result.map((el, i) => (el == num[i] ? true : false))
+  const validate = result.map((el, i) => (+el === +num[i] ? true : false))
 
   const getRandomNumber = (n) => {
     const random = Math.floor(Math.random() * n)
@@ -47,7 +47,7 @@ function Password() {
   }
 
   const checkResult = () => {
-    if (num.length > result.length) return ''
+    if (num.length !== result.length) return ''
     if (num.join('') === result.join('')) return 'win'
     return 'lose'
   }
@@ -115,7 +115,7 @@ function Password() {
           {['^', 0, '^'].map((el, i) => (
             <Pagination.Item
               onClick={() => {
-                if (el == 0) {
+                if (+el === 0) {
                   setResult((result) => [...result, el])
                 } else {
                   setNum(() => getRandomNumber(numLength))
